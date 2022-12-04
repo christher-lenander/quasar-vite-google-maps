@@ -7,8 +7,13 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'map-default',
-        component: () => import('src/pages/google-maps/DefaultPage.vue'),
+        name: 'map-home',
+        component: () => import('src/pages/google-maps/MapHomePage.vue'),
+      },
+      {
+        path: '/map-add-marker',
+        name: 'map-add-marker',
+        component: () => import('src/pages/google-maps/MapAddMarkerPage.vue'),
       },
     ],
   },
