@@ -4,15 +4,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
-  },
-  {
-    path: '/google-maps',
-    component: () => import('layouts/MainLayout.vue'),
     children: [
       {
         path: '',
-        name: 'maps-default',
+        name: 'map-default',
         component: () => import('src/pages/google-maps/DefaultPage.vue'),
       },
     ],
