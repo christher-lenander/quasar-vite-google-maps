@@ -12,14 +12,14 @@
             :key="index"
             :label="navLink.label"
             :class="{
-              'bg-brown-10 text-white': $route.name === navLink.to,
+              'bg-grey-10 text-white': $route.name === navLink.to,
             }"
             :to="{ name: navLink.to }"
             unelevated
           />
         </div>
         <q-space />
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Quasar (with vite) v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -40,7 +40,7 @@ const navLinks = <navLink[]>[
     to: 'map-home',
   },
   {
-    label: 'Add markers',
+    label: 'Add marker',
     to: 'map-add-marker',
   },
 ];
