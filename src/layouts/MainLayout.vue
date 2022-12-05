@@ -1,18 +1,15 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header
-      class="bg-white text-grey-10 shadow-2"
-      style="border: 1px solid #f5f5f5"
-    >
+    <q-header class="bg-white text-grey-10">
       <q-toolbar>
-        <q-toolbar-title> Quasar Google Maps </q-toolbar-title>
+        <q-toolbar-title>Quasar Google Maps Demo</q-toolbar-title>
         <div class="q-gutter-sm">
           <q-btn
             v-for="(navLink, index) in navLinks"
             :key="index"
             :label="navLink.label"
             :class="{
-              'bg-grey-10 text-white': $route.name === navLink.to,
+              'bg-brown-10 text-white': $route.name === navLink.to,
             }"
             :to="{ name: navLink.to }"
             unelevated

@@ -4,8 +4,7 @@
       :center="map.center"
       :zoom="map.zoom"
       :options="map.options"
-      style="height: calc(100vh - 50px)"
-      ref="gMap"
+      class="gmap"
     >
       <GMapMarker :position="marker.position" />
     </GMapMap>
@@ -29,3 +28,8 @@ const marker = ref({
   position: { lat: 59.3327202, lng: 18.067573 },
 });
 </script>
+<style lang="scss">
+.gmap {
+  height: calc(100vh - 50px);
+}
+</style>

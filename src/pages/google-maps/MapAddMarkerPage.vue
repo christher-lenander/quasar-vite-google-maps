@@ -20,10 +20,9 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { ClickEvent } from 'src/models/common.model';
+import { Marker } from 'src/models/marker.model';
 
-interface Marker {
-  position: google.maps.LatLngLiteral;
-}
 const markers = ref<Marker[]>([]);
 
 const map = reactive({
@@ -35,18 +34,6 @@ const map = reactive({
     clickableIcons: false,
   },
 });
-
-interface ClickEvent {
-  domEvent: Event;
-  latLng: {
-    lat: () => number;
-    lng: () => number;
-  };
-  pixel: {
-    x: number;
-    y: number;
-  };
-}
 
 const addMarker = (e: ClickEvent) => {
   const marker = {
