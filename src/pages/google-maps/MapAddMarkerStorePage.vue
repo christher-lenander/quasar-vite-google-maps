@@ -38,22 +38,9 @@ const addMarker = (e: ClickEvent) => {
   };
 
   store.addMarkerToMap(marker);
-
-  console.log('Pinia store (markers):', store.markers);
 };
 
 const map = ref(googleMapsDefaultOptions);
-
-// const addMarker = (e: ClickEvent) => {
-//   const marker = {
-//     position: {
-//       lat: e.latLng.lat(),
-//       lng: e.latLng.lng(),
-//     },
-//   };
-
-//   markers.value.push(marker);
-// };
 
 const handleMapClick = (e: ClickEvent) => addMarker(e);
 const handleMarkerClick = (e: ClickEvent) => {
