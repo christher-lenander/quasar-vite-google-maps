@@ -1,14 +1,29 @@
 import { defineStore } from 'pinia';
 import { Marker } from 'src/models/marker.model';
+import { ref } from 'vue';
 
-export const useGoogleMapsStore = defineStore('google-maps', {
-  state: () => ({
-    markers: <Marker[]>[],
-  }),
-  getters: {},
-  actions: {
-    addMarkerToMap(marker: Marker) {
-      this.markers.push(marker);
-    },
-  },
+export const useMapsStore = defineStore('maps-store', () => {
+  const markers = ref<Marker[]>([]);
+
+  const addMarker = (marker: Marker) => {
+    markers.value.push(marker);
+  };
+
+  const removeMarker = (id: string) => {
+    const index = markers.value.findIndex((marker) => marker.id === id);
+    if (index !== -1) {
+      markers.value.splice(index, 1);
+    }
+  };
+
+  const clearMarkers = () => {
+    markers.value.splice(0, markers.value.length);
+  };
+
+  return {
+    markers,
+    addMarker,
+    removeMarker,
+    clearMarkers,
+  };
 });

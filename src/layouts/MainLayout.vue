@@ -14,6 +14,13 @@
             :to="{ name: navLink.to }"
             unelevated
           />
+          <q-btn
+            v-if="$route.name === 'map-add-marker-store'"
+            label="Clear markers"
+            class="bg-red-10 text-white"
+            @click="store.clearMarkers()"
+            unelevated
+          />
         </div>
         <q-space />
         <div>Quasar (with vite) v{{ $q.version }}</div>
@@ -26,10 +33,14 @@
 </template>
 
 <script setup lang="ts">
+import { useMapsStore } from 'src/stores/google-maps-store';
+
 interface navLink {
   label: string;
   to: string;
 }
+
+const store = useMapsStore();
 
 const navLinks = <navLink[]>[
   {

@@ -9,10 +9,10 @@
       ref="gMap"
     >
       <GMapMarker
-        v-for="(marker, index) in markers"
+        v-for="marker in markers"
         :position="marker.position"
-        :key="index"
-        @click="handleMarkerClick"
+        :key="marker.id"
+        @click="store.removeMarker(marker.id)"
       />
     </GMapMap>
   </q-page>
@@ -23,27 +23,26 @@ import { ref } from 'vue';
 import { ClickEvent } from 'src/models/common.model';
 import { Marker } from 'src/models/marker.model';
 import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
-import { useGoogleMapsStore } from 'src/stores/google-maps-store';
+import { useMapsStore } from 'src/stores/google-maps-store';
+import { uid } from 'quasar';
 
-const store = useGoogleMapsStore();
+const store = useMapsStore();
 
 const markers = ref<Marker[]>(store.markers);
 
 const addMarker = (e: ClickEvent) => {
-  const marker = {
+  const marker: Marker = {
+    id: uid(),
     position: {
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),
     },
   };
 
-  store.addMarkerToMap(marker);
+  store.addMarker(marker);
 };
 
 const map = ref(googleMapsDefaultOptions);
 
 const handleMapClick = (e: ClickEvent) => addMarker(e);
-const handleMarkerClick = (e: ClickEvent) => {
-  console.log(e.latLng.lat(), e.latLng.lng());
-};
 </script>

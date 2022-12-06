@@ -2,7 +2,7 @@
   "name": "quasar-vite-google-maps",
   "version": "0.0.1",
   "description": "A Google Maps project",
-  "productName": "Quasar App",
+  "productName": "Quasar Google Maps Demo",
   "author": "Christher Lenander",
   "private": true,
   "scripts": {
