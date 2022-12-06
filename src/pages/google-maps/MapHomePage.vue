@@ -12,17 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
+import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
 
-const map = reactive({
-  center: { lat: 59.3327202, lng: 18.067573 },
-  zoom: 11,
-  options: {
-    disableDefaultUI: true,
-    disableDoubleClickZoom: true,
-    clickableIcons: false,
-  },
-});
+const map = ref(googleMapsDefaultOptions);
 
 const marker = ref({
   position: { lat: 59.3327202, lng: 18.067573 },

@@ -15,6 +15,12 @@ const routes: RouteRecordRaw[] = [
         name: 'map-add-marker',
         component: () => import('src/pages/google-maps/MapAddMarkerPage.vue'),
       },
+      {
+        path: '/map-add-marker-store',
+        name: 'map-add-marker-store',
+        component: () =>
+          import('src/pages/google-maps/MapAddMarkerStorePage.vue'),
+      },
     ],
   },
 

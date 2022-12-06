@@ -40,5 +40,9 @@ const navLinks = <navLink[]>[
     label: 'Add marker',
     to: 'map-add-marker',
   },
+  {
+    label: 'Add marker (Store)',
+    to: 'map-add-marker-store',
+  },
 ];
 </script>

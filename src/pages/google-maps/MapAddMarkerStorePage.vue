@@ -23,10 +23,11 @@ import { ref } from 'vue';
 import { ClickEvent } from 'src/models/common.model';
 import { Marker } from 'src/models/marker.model';
 import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
+import { useGoogleMapsStore } from 'src/stores/google-maps-store';
 
-const markers = ref<Marker[]>([]);
+const store = useGoogleMapsStore();
 
-const map = ref(googleMapsDefaultOptions);
+const markers = ref<Marker[]>(store.markers);
 
 const addMarker = (e: ClickEvent) => {
   const marker = {
@@ -36,8 +37,23 @@ const addMarker = (e: ClickEvent) => {
     },
   };
 
-  markers.value.push(marker);
+  store.addMarkerToMap(marker);
+
+  console.log('Pinia store (markers):', store.markers);
 };
+
+const map = ref(googleMapsDefaultOptions);
+
+// const addMarker = (e: ClickEvent) => {
+//   const marker = {
+//     position: {
+//       lat: e.latLng.lat(),
+//       lng: e.latLng.lng(),
+//     },
+//   };
+
+//   markers.value.push(marker);
+// };
 
 const handleMapClick = (e: ClickEvent) => addMarker(e);
 const handleMarkerClick = (e: ClickEvent) => {
