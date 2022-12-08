@@ -1,13 +1,37 @@
 <template>
   <q-page>
     <GMapMap
-      :center="map.center"
-      :zoom="map.zoom"
-      :options="map.options"
+      :center="googleMaps.center"
+      :zoom="googleMaps.zoom"
+      :options="googleMaps.options"
       style="height: calc(100vh - 50px)"
       @click="handleMapClick"
       ref="gMap"
     >
+      <q-toolbar
+        class="text-grey-10 fixed shadow-4 bg-white"
+        style="
+          width: 50vw;
+          top: 70px;
+          border-radius: 3px;
+          transform: translateX(-50%);
+          left: 50%;
+        "
+      >
+        <q-toggle
+          v-model="disableAddMarker"
+          color="grey-9"
+          label="Disable Add Marker"
+        />
+        <q-space />
+
+        <q-btn
+          :disabled="!markers.length"
+          label="Clear Map"
+          class="bg-red-10 text-white"
+          @click="store.clearMarkers()"
+        />
+      </q-toolbar>
       <GMapMarker
         v-for="marker in markers"
         :position="marker.position"
@@ -20,29 +44,21 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ClickEvent } from 'src/models/common.model';
-import { Marker } from 'src/models/marker.model';
-import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
 import { useMapsStore } from 'src/stores/google-maps-store';
-import { uid } from 'quasar';
+import { ClickEvent } from 'src/models/common.model';
+import { storeToRefs } from 'pinia';
+import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
 
 const store = useMapsStore();
 
-const markers = ref<Marker[]>(store.markers);
+const disableAddMarker = ref(false);
 
-const addMarker = (e: ClickEvent) => {
-  const marker: Marker = {
-    id: uid(),
-    position: {
-      lat: e.latLng.lat(),
-      lng: e.latLng.lng(),
-    },
-  };
+const googleMaps = ref(googleMapsDefaultOptions);
 
-  store.addMarker(marker);
+const { markers } = storeToRefs(store);
+
+const handleMapClick = (e: ClickEvent) => {
+  if (disableAddMarker.value) return;
+  store.addMarker(e.latLng.lat(), e.latLng.lng());
 };
-
-const map = ref(googleMapsDefaultOptions);
-
-const handleMapClick = (e: ClickEvent) => addMarker(e);
 </script>

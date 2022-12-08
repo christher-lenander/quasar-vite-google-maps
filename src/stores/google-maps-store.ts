@@ -1,11 +1,16 @@
 import { defineStore } from 'pinia';
-import { Marker } from 'src/models/marker.model';
 import { ref } from 'vue';
+import { uid } from 'quasar';
+import { Marker } from 'src/models/marker.model';
 
 export const useMapsStore = defineStore('maps-store', () => {
   const markers = ref<Marker[]>([]);
 
-  const addMarker = (marker: Marker) => {
+  const addMarker = (lat: number, lng: number) => {
+    const marker: Marker = {
+      id: uid(),
+      position: { lat, lng },
+    };
     markers.value.push(marker);
   };
 

@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-white text-grey-10">
+    <q-header class="bg-white text-grey-10" elevated>
       <q-toolbar>
         <q-toolbar-title>Quasar Google Maps Demo</q-toolbar-title>
         <div class="q-gutter-sm">
@@ -8,17 +8,11 @@
             v-for="(navLink, index) in navLinks"
             :key="index"
             :label="navLink.label"
+            rounded
             :class="{
-              'bg-brown-10 text-white': $route.name === navLink.to,
+              'bg-grey-9 text-white': $route.name === navLink.to,
             }"
             :to="{ name: navLink.to }"
-            unelevated
-          />
-          <q-btn
-            v-if="$route.name === 'map-add-marker-store'"
-            label="Clear markers"
-            class="bg-red-10 text-white"
-            @click="store.clearMarkers()"
             unelevated
           />
         </div>
