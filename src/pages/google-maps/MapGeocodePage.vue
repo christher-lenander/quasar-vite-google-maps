@@ -27,16 +27,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
 import { Marker } from 'src/models/marker.model';
 import { uid } from 'quasar';
 
-const googleMaps = ref(googleMapsDefaultOptions);
+const options = {
+  zoom: 12,
+  center: { lat: 59.3327202, lng: 18.067573 },
+  options: {
+    disableDefaultUI: true,
+    disableDoubleClickZoom: true,
+    clickableIcons: false,
+  },
+};
+
+const googleMaps = ref(options);
 const marker = ref<Marker | null>(null);
 const address = ref('');
 let geocoder: google.maps.Geocoder;
-
-googleMaps.value.zoom = 13;
 
 const geocode = (request: google.maps.GeocoderRequest): void => {
   marker.value = null;
