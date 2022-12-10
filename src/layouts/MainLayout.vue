@@ -27,14 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { useMapsStore } from 'src/stores/google-maps-store';
-
 interface navLink {
   label: string;
   to: string;
 }
-
-const store = useMapsStore();
 
 const navLinks = <navLink[]>[
   {
