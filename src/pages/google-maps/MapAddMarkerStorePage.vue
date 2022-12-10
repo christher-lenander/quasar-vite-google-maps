@@ -29,14 +29,14 @@
           :disabled="!markers.length"
           label="Clear Map"
           class="bg-red-10 text-white"
-          @click="store.clearMarkers()"
+          @click="clearMarkers()"
         />
       </q-toolbar>
       <GMapMarker
         v-for="marker in markers"
         :position="marker.position"
         :key="marker.id"
-        @click="store.removeMarker(marker.id)"
+        @click="removeMarker(marker.id)"
       />
     </GMapMap>
   </q-page>
@@ -49,16 +49,18 @@ import { ClickEvent } from 'src/models/common.model';
 import { storeToRefs } from 'pinia';
 import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
 
-const store = useMapsStore();
+const { markers } = storeToRefs(useMapsStore());
+const { addMarker, removeMarker, clearMarkers } = useMapsStore();
 
 const disableAddMarker = ref(false);
 
 const googleMaps = ref(googleMapsDefaultOptions);
 
-const { markers } = storeToRefs(store);
-
 const handleMapClick = (e: ClickEvent) => {
-  if (disableAddMarker.value) return;
-  store.addMarker(e.latLng.lat(), e.latLng.lng());
+  if (disableAddMarker.value) {
+    return;
+  }
+
+  addMarker(e.latLng.lat(), e.latLng.lng());
 };
 </script>
