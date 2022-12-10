@@ -11,15 +11,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/google-maps/MapHomePage.vue'),
       },
       {
-        path: '/map-add-marker',
-        name: 'map-add-marker',
-        component: () => import('src/pages/google-maps/MapAddMarkerPage.vue'),
+        path: 'map-add-markers',
+        name: 'map-add-markers',
+        component: () => import('src/pages/google-maps/MapAddMarkersPage.vue'),
       },
       {
-        path: '/map-add-marker-store',
-        name: 'map-add-marker-store',
-        component: () =>
-          import('src/pages/google-maps/MapAddMarkerStorePage.vue'),
+        path: 'map-geocode',
+        name: 'map-geocode',
+        component: () => import('src/pages/google-maps/MapGeocodePage.vue'),
       },
     ],
   },

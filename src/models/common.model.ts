@@ -1,9 +1,6 @@
 export interface ClickEvent {
   domEvent: Event;
-  latLng: {
-    lat: () => number;
-    lng: () => number;
-  };
+  latLng: google.maps.LatLng;
   pixel: {
     x: number;
     y: number;

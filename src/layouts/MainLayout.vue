@@ -8,7 +8,6 @@
             v-for="(navLink, index) in navLinks"
             :key="index"
             :label="navLink.label"
-            rounded
             :class="{
               'bg-grey-9 text-white': $route.name === navLink.to,
             }"
@@ -38,12 +37,12 @@ const navLinks = <navLink[]>[
     to: 'map-home',
   },
   {
-    label: 'Add marker',
-    to: 'map-add-marker',
+    label: 'Add markers',
+    to: 'map-add-markers',
   },
   {
-    label: 'Add marker (Store)',
-    to: 'map-add-marker-store',
+    label: 'Geocode',
+    to: 'map-geocode',
   },
 ];
 </script>

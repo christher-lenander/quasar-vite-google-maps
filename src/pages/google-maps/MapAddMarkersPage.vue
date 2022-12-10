@@ -8,21 +8,17 @@
       @click="handleMapClick"
       ref="gMap"
     >
-      <q-toolbar
-        class="text-grey-10 fixed shadow-4 bg-white"
-        style="
-          width: 50vw;
-          top: 70px;
-          border-radius: 3px;
-          transform: translateX(-50%);
-          left: 50%;
-        "
-      >
+      <q-toolbar class="text-grey-10 fixed shadow-4 bg-white my-toolbar">
         <q-toggle
           v-model="disableAddMarker"
           color="grey-9"
           label="Disable Add Marker"
         />
+
+        <q-space />
+
+        <div>Markers: {{ markerCounter }}</div>
+
         <q-space />
 
         <q-btn
@@ -49,18 +45,31 @@ import { ClickEvent } from 'src/models/common.model';
 import { storeToRefs } from 'pinia';
 import { googleMapsDefaultOptions } from 'src/config/google-maps-options';
 
-const { markers } = storeToRefs(useMapsStore());
-const { addMarker, removeMarker, clearMarkers } = useMapsStore();
+const { markers, markerCounter } = storeToRefs(useMapsStore());
+const { addMarker, removeMarker, clearMarkers, geocode } = useMapsStore();
 
 const disableAddMarker = ref(false);
-
+const address = ref('');
 const googleMaps = ref(googleMapsDefaultOptions);
 
+const geocodeAddress = () => {
+  void geocode({ address: address.value });
+};
 const handleMapClick = (e: ClickEvent) => {
   if (disableAddMarker.value) {
     return;
   }
 
-  addMarker(e.latLng.lat(), e.latLng.lng());
+  addMarker(e.latLng.toJSON());
 };
 </script>
+
+<style lang="scss" scoped>
+.my-toolbar {
+  width: 50vw;
+  top: 70px;
+  border-radius: 3px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+</style>
